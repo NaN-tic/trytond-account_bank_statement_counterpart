@@ -112,6 +112,8 @@ class StatementLine(metaclass=PoolMeta):
         check_lines = dict((c, set()) for c in company_ids)
 
         for line in lines:
+            if not line.account_date:
+                continue
             check_lines.setdefault(line.company.id, set()).add(line.account_date)
 
         for company, dates in check_lines.items():
