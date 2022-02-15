@@ -137,7 +137,10 @@ class StatementLine(metaclass=PoolMeta):
         cls.reset_counterpart_move(statement_lines)
         to_write = []
         for st_line in statement_lines:
-            st_line.counterpart_lines = None
+            st_line._fields['counterpart_lines'].remove(
+                st_line,
+                st_line.counterpart_lines
+            )
             to_write.extend(([st_line], st_line._save_values))
         if to_write:
             cls.write(*to_write)
