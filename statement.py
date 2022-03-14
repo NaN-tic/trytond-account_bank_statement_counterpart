@@ -81,6 +81,7 @@ class StatementLine(metaclass=PoolMeta):
             ('bank_statement_line_counterpart', '=', None),
             ('move_state', '=', 'posted'),
             ('account.reconcile', '=', True),
+            ('move.company', '=', self.company.id),
             ]
 
     def _search_counterpart_line_reconciliation(self):
@@ -108,13 +109,14 @@ class StatementLine(metaclass=PoolMeta):
     def _check_period(lines):
         Period = Pool().get('account.period')
 
-        company_ids = set(l.company.id for l in lines)
-        check_lines = dict((c, set()) for c in company_ids)
+        company_ids = set(x.company.id for x in lines)
+        check_lines = dict((x, set()) for x in company_ids)
 
         for line in lines:
             if not line.account_date:
                 continue
-            check_lines.setdefault(line.company.id, set()).add(line.account_date)
+            check_lines.setdefault(
+                line.company.id, set()).add(line.account_date)
 
         for company, dates in check_lines.items():
             for date in set(dates):
@@ -148,7 +150,7 @@ class StatementLine(metaclass=PoolMeta):
         if self.state == 'posted':
             return amount
 
-        amount += sum((l.debit or _ZERO) - (l.credit or _ZERO) for l in
+        amount += sum((x.debit or _ZERO) - (x.credit or _ZERO) for x in
             self.counterpart_lines)
         if self.company_currency:
             amount = self.company_currency.round(amount)
@@ -260,8 +262,9 @@ class StatementLine(metaclass=PoolMeta):
                 journal=journal.rec_name))
         if not account.bank_reconcile:
             raise UserError(gettext(
-                'account_bank_statement_counterpart.account_not_bank_reconcile',
-                journal=journal.rec_name))
+                    'account_bank_statement_counterpart.'
+                    'account_not_bank_reconcile',
+                    journal=journal.rec_name))
         if line.account == account:
             raise UserError(gettext(
                 'account_bank_statement_counterpart.same_account',
@@ -360,6 +363,6 @@ class Reconciliation(metaclass=PoolMeta):
         if lines:
             line = lines[0]
             raise UserError(gettext(
-                'account_bank_statement_counterpart.reconciliation_cannot_delete',
-                    bank_line=line.origin.rec_name
-                    ))
+                    'account_bank_statement_counterpart.'
+                    'reconciliation_cannot_delete',
+                    bank_line=line.origin.rec_name))
