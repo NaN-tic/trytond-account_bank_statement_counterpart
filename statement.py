@@ -148,9 +148,6 @@ class StatementLine(metaclass=PoolMeta):
     @fields.depends('state', 'counterpart_lines')
     def on_change_with_moves_amount(self, name=None):
         amount = super(StatementLine, self).on_change_with_moves_amount(name)
-        if self.state == 'posted':
-            return amount
-
         amount += sum((x.debit or _ZERO) - (x.credit or _ZERO) for x in
             self.counterpart_lines)
         if self.company_currency:
@@ -161,7 +158,6 @@ class StatementLine(metaclass=PoolMeta):
     def reset_counterpart_move(cls, lines):
         pool = Pool()
         Reconciliation = pool.get('account.move.reconciliation')
-        BankReconciliation = pool.get('account.bank.reconciliation')
         Move = pool.get('account.move')
 
         delete_moves = []
@@ -174,13 +170,7 @@ class StatementLine(metaclass=PoolMeta):
                     if x.move != counterpart.move:
                         delete_moves.append(x.move)
                 delete_reconciliation.append(counterpart.reconciliation)
-        delete_bank_reconciliation = []
-        for move in delete_moves:
-            for line in move.lines:
-                delete_bank_reconciliation.extend(line.bank_lines)
         with Transaction().set_context(from_account_bank_statement_line=True):
-            if delete_bank_reconciliation:
-                BankReconciliation.delete(delete_bank_reconciliation)
             if delete_reconciliation:
                 Reconciliation.delete(delete_reconciliation)
             if delete_moves:
@@ -216,12 +206,6 @@ class StatementLine(metaclass=PoolMeta):
             raise UserError(gettext(
                 'account_bank_statement_counterpart.not_found_counterparts'))
         Line.reconcile([counterparts[0], line])
-
-        # Assign line to Transactions
-        st_move_line, = [x for x in move.lines if x.account == account]
-        bank_line, = st_move_line.bank_lines
-        bank_line.bank_statement_line = self
-        bank_line.save()
         self.save()
 
     def _get_counterpart_move_lines(self, line):
@@ -250,7 +234,7 @@ class StatementLine(metaclass=PoolMeta):
                     self.company_currency, amount, self.statement_currency))
             second_currency = self.statement_currency
             counterpart.amount_second_currency = (amount_second_currency *
-                (-1 if line.debit - line.credit > 0 else 1))
+                (-1 if amount > _ZERO else 1))
             counterpart.second_currency = second_currency
 
         # Generate Bank Line.
@@ -282,7 +266,8 @@ class StatementLine(metaclass=PoolMeta):
             origin=self,
             move_origin=self.statement,
             second_currency=second_currency,
-            amount_second_currency=amount_second_currency,
+            amount_second_currency=(amount_second_currency *
+                (1 if amount > _ZERO else -1)),
             )
         if account.party_required:
             bank_move.party = line.party or self.company.party
