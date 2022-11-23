@@ -267,7 +267,8 @@ class StatementLine(metaclass=PoolMeta):
             move_origin=self.statement,
             second_currency=second_currency,
             amount_second_currency=(amount_second_currency *
-                (1 if amount > _ZERO else -1)),
+                (1 if amount > _ZERO else -1)
+                if amount_second_currency else None),
             )
         if account.party_required:
             bank_move.party = line.party or self.company.party
