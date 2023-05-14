@@ -223,7 +223,7 @@ class StatementLine(metaclass=PoolMeta):
         counterpart.account = line.account
         if line.account.party_required:
             counterpart.party = line.party
-        counterpart.origin = str(self)
+        counterpart.origin = self
 
         amount = line.debit - line.credit
         amount_second_currency = None
@@ -288,13 +288,6 @@ class Move(metaclass=PoolMeta):
             return
         return super(Move, cls).check_modify(*args, **kwargs)
 
-    @classmethod
-    def _get_origin(cls):
-        'Return list of Model names for origin Reference'
-        result = super(Move, cls)._get_origin()
-        result.append('account.bank.statement')
-        return result
-
 
 class MoveLine(metaclass=PoolMeta):
     __name__ = 'account.move.line'
@@ -321,11 +314,6 @@ class MoveLine(metaclass=PoolMeta):
                 False):
             return
         return super(MoveLine, cls).check_modify(*args, **kwargs)
-
-    @classmethod
-    def _get_origin(cls):
-        return (super(MoveLine, cls)._get_origin()
-            + ['account.bank.statement'])
 
 
 class Reconciliation(metaclass=PoolMeta):
