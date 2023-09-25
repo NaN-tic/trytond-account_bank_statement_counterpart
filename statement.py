@@ -69,11 +69,12 @@ class StatementLine(metaclass=PoolMeta):
 
     @classmethod
     def create(cls, vlist):
+        vlist = [x.copy() for x in vlist]
         for vals in vlist:
             if vals.get('account_date') or not vals.get('date', None):
                 continue
             vals['account_date'] = vals['date']
-        return super(StatementLine, cls).create(vlist)
+        return super().create(vlist)
 
     def _search_counterpart_line_reconciliation_domain(self):
         return [
