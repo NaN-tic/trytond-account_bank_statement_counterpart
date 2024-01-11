@@ -42,8 +42,7 @@ class StatementLine(metaclass=PoolMeta):
             ('bank_statement_line_counterpart', '=', None),
             ('move_state', '=', 'posted'),
             ('account.reconcile', '=', True),
-            ],
-        depends=['company'])
+            ])
     account_date = fields.Function(fields.DateTime('Account Date'),
         'get_date_utc', searcher='search_date_utc',
         setter='set_date_utc')
