@@ -33,7 +33,7 @@ class StatementLine(metaclass=PoolMeta):
     counterpart_lines = fields.One2Many('account.move.line',
         'bank_statement_line_counterpart', 'Counterpart',
         states=POSTED_STATES, domain=[
-            ('move.company', '=', Eval('company')),
+            ('move.company', '=', Eval('company', -1)),
             ('account.reconcile', '=', True),
             ('move_state', '=', 'posted'),
             ],
