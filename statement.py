@@ -24,7 +24,7 @@ POSTED_STATES = {
     }
 POSTED_DEPENDS = ['state']
 
-_ZERO = Decimal('0.0')
+_ZERO = Decimal(0)
 
 
 class StatementLine(metaclass=PoolMeta):
