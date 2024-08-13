@@ -24,7 +24,6 @@ class Test(unittest.TestCase):
 
     def test(self):
 
-        today = datetime.date.today()
         now = datetime.datetime.now()
 
         # Install account_bank_statement_counterpart
@@ -49,7 +48,6 @@ class Test(unittest.TestCase):
         accounts = get_accounts(company)
         receivable = accounts['receivable']
         revenue = accounts['revenue']
-        expense = accounts['expense']
         cash = accounts['cash']
         cash.bank_reconcile = True
         cash.reconcile = True
@@ -98,10 +96,8 @@ class Test(unittest.TestCase):
         line2.account = revenue
         line2.credit = Decimal('80.0')
         move.click('post')
-        self.assertEqual(move.state
-        , 'posted'
-        )
-        line1, line2 = move.lines
+        self.assertEqual(move.state, 'posted')
+        _, line2 = move.lines
 
         # Create Bank Statement With Different Curreny
         BankStatement = Model.get('account.bank.statement')
@@ -116,9 +112,8 @@ class Test(unittest.TestCase):
         statement_line.description = 'Statement Line'
         statement_line.amount = Decimal('80.0')
         statement.click('confirm')
-        self.assertEqual(statement.state == 'confirmed'
-        , True
-        )
+        self.assertEqual(statement.state, 'confirmed')
+
         statement_line, = statement.lines
         statement_line.reload()
         line2.reload()
@@ -131,9 +126,11 @@ class Test(unittest.TestCase):
         move_line, = [x for x in line2.reconciliation.lines if x != line2]
         self.assertEqual(move_line.account, line2.account)
         self.assertEqual(move_line.credit, Decimal('80.0'))
+
         move_line2, = [x for x in move_line.move.lines if x != move_line]
         self.assertEqual(move_line2.account, statement_line.account)
         self.assertEqual(move_line2.debit, Decimal('80.0'))
+
         receivable.reload()
         self.assertEqual(receivable.balance, Decimal('0.00'))
 
