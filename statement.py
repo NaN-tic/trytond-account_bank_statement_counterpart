@@ -10,10 +10,6 @@ from trytond import backend
 from trytond.i18n import gettext
 from trytond.exceptions import UserError
 
-
-__all__ = ['StatementLine', 'Move', 'MoveLine', 'Reconciliation']
-
-
 CONFIRMED_STATES = {
     'readonly': Not(Equal(Eval('state'), 'draft'))
     }
@@ -278,17 +274,6 @@ class StatementLine(metaclass=PoolMeta):
         return move_lines
 
 
-class Move(metaclass=PoolMeta):
-    __name__ = 'account.move'
-
-    @classmethod
-    def check_modify(cls, *args, **kwargs):
-        if Transaction().context.get('from_account_bank_statement_line',
-                False):
-            return
-        return super(Move, cls).check_modify(*args, **kwargs)
-
-
 class MoveLine(metaclass=PoolMeta):
     __name__ = 'account.move.line'
 
@@ -307,13 +292,6 @@ class MoveLine(metaclass=PoolMeta):
             default = {}
         default['bank_statement_line_counterpart'] = None
         return super(MoveLine, cls).copy(lines, default=default)
-
-    @classmethod
-    def check_modify(cls, *args, **kwargs):
-        if Transaction().context.get('from_account_bank_statement_line',
-                False):
-            return
-        return super(MoveLine, cls).check_modify(*args, **kwargs)
 
 
 class Reconciliation(metaclass=PoolMeta):

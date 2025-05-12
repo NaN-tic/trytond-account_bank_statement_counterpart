@@ -7,7 +7,6 @@ from . import statement
 
 def register():
     Pool.register(
-        statement.Move,
         statement.MoveLine,
         statement.StatementLine,
         statement.Reconciliation,
