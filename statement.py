@@ -6,7 +6,6 @@ from trytond.model import ModelView, fields
 from trytond.pyson import Eval, Not, Equal, Bool
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
-from trytond import backend
 from trytond.i18n import gettext
 from trytond.exceptions import UserError
 
@@ -53,7 +52,7 @@ class StatementLine(metaclass=PoolMeta):
 
     @classmethod
     def __register__(cls, module_name):
-        table = backend.TableHandler(cls, module_name)
+        table = cls.__table_handler__(module_name)
 
         # Migration: rename account_date into account_date_utc
         if (table.column_exist('account_date')
