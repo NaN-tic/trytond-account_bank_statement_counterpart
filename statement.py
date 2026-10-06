@@ -278,7 +278,9 @@ class MoveLine(metaclass=PoolMeta):
 
     bank_statement_line_counterpart = fields.Many2One(
         'account.bank.statement.line', 'Bank Statement Line Counterpart',
-        readonly=True)
+        states={
+            'editable': False,
+            })
 
     @classmethod
     def __setup__(cls):
