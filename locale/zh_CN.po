@@ -1,0 +1,59 @@
+#
+msgid ""
+msgstr ""
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "field:account.bank.statement.line,account_date:"
+msgid "Account Date"
+msgstr "记账日期"
+
+msgctxt "field:account.bank.statement.line,account_date_utc:"
+msgid "Account Date UTC"
+msgstr "UTC 记账日期"
+
+msgctxt "field:account.bank.statement.line,counterpart_lines:"
+msgid "Counterpart"
+msgstr "对方科目"
+
+msgctxt "field:account.move.line,bank_statement_line_counterpart:"
+msgid "Bank Statement Line Counterpart"
+msgstr "银行对账单明细对方科目"
+
+#, python-format
+msgctxt "model:ir.message,text:account_not_bank_reconcile"
+msgid ""
+"The of Bank Statement Journal \"%(journal)s\" is not checked as \"Bank "
+"Conciliation\"."
+msgstr "银行对账单日记账“%(journal)s”未勾选“银行对账”。"
+
+#, python-format
+msgctxt "model:ir.message,text:account_statement_journal"
+msgid ""
+"Please provide debit and credit account on statement journal "
+"\"%(journal)s\"."
+msgstr "请为对账单日记账“%(journal)s”设置借方和贷方科目。"
+
+msgctxt "model:ir.message,text:not_found_counterparts"
+msgid ""
+"Not found a counterpart account. Check accounts from journal and move lines "
+"are not the same."
+msgstr "未找到对方科目。请检查日记账和分录的科目是否不同。"
+
+#, python-format
+msgctxt "model:ir.message,text:reconciliation_cannot_delete"
+msgid ""
+"Cannot break reconciliation because there is a line assigned to Bank "
+"Statement Line. Please go to \"%(bank_line)s\" bank statement line to "
+"unreconcile."
+msgstr "无法取消核销，因为有分录已分配给银行对账单明细。请转到银行对账单明细“%(bank_line)s”取消核销。"
+
+#, python-format
+msgctxt "model:ir.message,text:same_account"
+msgid ""
+"Account \"%(account)s\" in statement line \"%(line)s\" is the same as the "
+"one configured on journal \"%(journal)s\"."
+msgstr "对账单明细“%(line)s”的科目“%(account)s”与日记账“%(journal)s”中配置的科目相同。"
