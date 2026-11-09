@@ -1,0 +1,67 @@
+#
+msgid ""
+msgstr ""
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "field:account.bank.statement.line,account_date:"
+msgid "Account Date"
+msgstr "Könyvelési dátum"
+
+msgctxt "field:account.bank.statement.line,account_date_utc:"
+msgid "Account Date UTC"
+msgstr "Könyvelési dátum UTC szerint"
+
+msgctxt "field:account.bank.statement.line,counterpart_lines:"
+msgid "Counterpart"
+msgstr "Ellentétel"
+
+msgctxt "field:account.move.line,bank_statement_line_counterpart:"
+msgid "Bank Statement Line Counterpart"
+msgstr "Bankkivonatsor ellentétele"
+
+#, python-format
+msgctxt "model:ir.message,text:account_not_bank_reconcile"
+msgid ""
+"The of Bank Statement Journal \"%(journal)s\" is not checked as \"Bank "
+"Conciliation\"."
+msgstr ""
+"A(z) „%(journal)s” bankkivonatnaplónál nincs bejelölve a „Banki egyeztetés”."
+
+#, python-format
+msgctxt "model:ir.message,text:account_statement_journal"
+msgid ""
+"Please provide debit and credit account on statement journal "
+"\"%(journal)s\"."
+msgstr ""
+"Adja meg a tartozik és követel számlát a(z) „%(journal)s” kivonatnaplónál."
+
+msgctxt "model:ir.message,text:not_found_counterparts"
+msgid ""
+"Not found a counterpart account. Check accounts from journal and move lines "
+"are not the same."
+msgstr ""
+"Nem található ellenszámla. Ellenőrizze, hogy a napló és a könyvelési sorok "
+"számlái eltérnek-e."
+
+#, python-format
+msgctxt "model:ir.message,text:reconciliation_cannot_delete"
+msgid ""
+"Cannot break reconciliation because there is a line assigned to Bank "
+"Statement Line. Please go to \"%(bank_line)s\" bank statement line to "
+"unreconcile."
+msgstr ""
+"A kiegyenlítés nem vonható vissza, mert egy sor bankkivonatsorhoz van "
+"rendelve. A visszavonáshoz nyissa meg a(z) „%(bank_line)s” bankkivonatsort."
+
+#, python-format
+msgctxt "model:ir.message,text:same_account"
+msgid ""
+"Account \"%(account)s\" in statement line \"%(line)s\" is the same as the "
+"one configured on journal \"%(journal)s\"."
+msgstr ""
+"A(z) „%(line)s” kivonatsor „%(account)s” számlája megegyezik a(z) "
+"„%(journal)s” naplóban beállított számlával."
