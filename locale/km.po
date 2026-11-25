@@ -1,0 +1,68 @@
+#
+msgid ""
+msgstr ""
+"Language: km\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "field:account.bank.statement.line,account_date:"
+msgid "Account Date"
+msgstr "កាលបរិច្ឆេទគណនេយ្យ"
+
+msgctxt "field:account.bank.statement.line,account_date_utc:"
+msgid "Account Date UTC"
+msgstr "កាលបរិច្ឆេទគណនេយ្យ UTC"
+
+msgctxt "field:account.bank.statement.line,counterpart_lines:"
+msgid "Counterpart"
+msgstr "ធាតុគូ"
+
+msgctxt "field:account.move.line,bank_statement_line_counterpart:"
+msgid "Bank Statement Line Counterpart"
+msgstr "ធាតុគូរបស់បន្ទាត់របាយការណ៍គណនីធនាគារ"
+
+#, python-format
+msgctxt "model:ir.message,text:account_not_bank_reconcile"
+msgid ""
+"The of Bank Statement Journal \"%(journal)s\" is not checked as \"Bank "
+"Conciliation\"."
+msgstr ""
+"ទិនានុប្បវត្តិរបាយការណ៍គណនីធនាគារ «%(journal)s» មិនបានធីក "
+"«ការផ្ទៀងផ្ទាត់សមតុល្យធនាគារ»។"
+
+#, python-format
+msgctxt "model:ir.message,text:account_statement_journal"
+msgid ""
+"Please provide debit and credit account on statement journal \"%(journal)s\"."
+msgstr ""
+"សូមផ្ដល់គណនីឥណពន្ធ និងឥណទានក្នុងទិនានុប្បវត្តិរបាយការណ៍គណនី «%(journal)s»។"
+
+msgctxt "model:ir.message,text:not_found_counterparts"
+msgid ""
+"Not found a counterpart account. Check accounts from journal and move lines "
+"are not the same."
+msgstr ""
+"រកមិនឃើញគណនីគូ។ សូមពិនិត្យថាគណនីក្នុងទិនានុប្បវត្តិ "
+"និងក្នុងបន្ទាត់កំណត់ត្រាគណនេយ្យខុសគ្នា។"
+
+#, python-format
+msgctxt "model:ir.message,text:reconciliation_cannot_delete"
+msgid ""
+"Cannot break reconciliation because there is a line assigned to Bank "
+"Statement Line. Please go to \"%(bank_line)s\" bank statement line to "
+"unreconcile."
+msgstr ""
+"មិនអាចលុបការផ្ទៀងផ្ទាត់សមតុល្យបានទេ "
+"ព្រោះមានបន្ទាត់មួយភ្ជាប់ទៅបន្ទាត់របាយការណ៍គណនីធនាគារ។ សូមចូលបន្ទាត់របាយការណ៍ "
+"«%(bank_line)s» ដើម្បីលុបការផ្ទៀងផ្ទាត់សមតុល្យ។"
+
+#, python-format
+msgctxt "model:ir.message,text:same_account"
+msgid ""
+"Account \"%(account)s\" in statement line \"%(line)s\" is the same as the one"
+" configured on journal \"%(journal)s\"."
+msgstr ""
+"គណនី «%(account)s» ក្នុងបន្ទាត់របាយការណ៍គណនី «%(line)s» "
+"គឺដូចគ្នានឹងគណនីដែលបានកំណត់ក្នុងទិនានុប្បវត្តិ «%(journal)s»។"
